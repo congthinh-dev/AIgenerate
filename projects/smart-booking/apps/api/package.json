@@ -1,0 +1,6 @@
+{
+  "name": "@smart-booking/api", "private": true, "type": "module",
+  "scripts": { "dev": "tsx watch src/server.ts", "build": "tsc -p tsconfig.json" },
+  "dependencies": { "express": "^5.1.0", "zod": "^4.1.0", "dotenv": "^16.4.0" },
+  "devDependencies": { "@types/express": "^5.0.0", "@types/node": "^24.0.0", "@types/supertest": "^6.0.0", "supertest": "^7.1.0" }
+}

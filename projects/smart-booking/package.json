@@ -1,0 +1,19 @@
+{
+  "name": "smart-resource-booking",
+  "private": true,
+  "workspaces": ["apps/api", "apps/web"],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "tsx watch apps/api/src/server.ts",
+    "dev:web": "vite apps/web --config apps/web/vite.config.ts --host 127.0.0.1",
+    "build": "npm run build --workspace @smart-booking/api && npm run build --workspace @smart-booking/web",
+    "test": "vitest run --config vitest.config.ts",
+    "typecheck": "tsc --noEmit -p apps/api/tsconfig.json && tsc --noEmit -p apps/web/tsconfig.json",
+    "db:generate": "prisma generate --schema prisma/schema.prisma",
+    "db:migrate": "cross-env RUST_LOG=info prisma migrate dev --schema prisma/schema.prisma",
+    "db:deploy": "cross-env RUST_LOG=info prisma migrate deploy --schema prisma/schema.prisma",
+    "db:seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": { "@prisma/client": "6.19.0", "zod": "^4.1.0" },
+  "devDependencies": { "@types/node": "^24.0.0", "concurrently": "^9.2.0", "cross-env": "^10.1.0", "prisma": "6.19.0", "tsx": "^4.20.0", "typescript": "^5.9.0", "vitest": "^3.2.0" }
+}
